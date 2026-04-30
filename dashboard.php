@@ -11,7 +11,7 @@ include 'koneksi.php';
 
 // Ambil data user yang sedang login
 $nama_user = $_SESSION['nama_lengkap'];
-$role_user = ucfirst($_SESSION['role']);
+$role_user = strtoupper($_SESSION['role']);
 
 // --------------------------------------------------------
 // MENGAMBIL DATA STATISTIK DARI DATABASE

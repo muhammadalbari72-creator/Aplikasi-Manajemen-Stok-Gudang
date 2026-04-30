@@ -6,7 +6,7 @@ header("Pragma: no-cache");
 
 // Pastikan file ini dipanggil setelah session_start() dan include 'koneksi.php' di file utama
 $nama_user = $_SESSION['nama_lengkap'];
-$role_user = ucfirst($_SESSION['role']);
+$role_user = strtoupper($_SESSION['role']);
 
 // LOGIKA NOTIFIKASI STOK RENDAH
 // Mengambil data barang yang stoknya kurang dari atau sama dengan batas minimum

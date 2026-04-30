@@ -11,7 +11,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "sudah_login") {
 include 'koneksi.php';
 
 $nama_user = $_SESSION['nama_lengkap'];
-$role_user = ucfirst($_SESSION['role']);
+$role_user = strtoupper($_SESSION['role']);
 
 // Notifikasi Stok Kritis
 $query_kritis = mysqli_query($koneksi, "SELECT * FROM barang WHERE stok <= stok_min");
