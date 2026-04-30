@@ -9,7 +9,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "sudah_login") {
 }
 
 $nama_user = $_SESSION['nama_lengkap'];
-$role_user = ucfirst($_SESSION['role']);
+$role_user = strtoupper($_SESSION['role']);
 
 // 2. LOGIKA SIMPAN (TAMBAH)
 if (isset($_POST['simpan_supplier'])) {
