@@ -215,34 +215,30 @@ window.addEventListener('pageshow', function (event) {
         window.location.reload();
     }
 });     
-// Ambil elemen yang dibutuhkan
-const selectBarang = document.querySelector('select[name="id_barang"]');
-const inputJumlah = document.querySelector('input[name="jumlah"]');
+// Ambil elemen yang dibutuhkan (khusus halaman transaksi_keluar)
 const tombolSimpan = document.querySelector('button[name="simpan_keluar"]');
 
-function validasiInstan() {
-    // Ambil info stok dari atribut data atau teks di dalam <option>
-    const optionTerpilih = selectBarang.options[selectBarang.selectedIndex];
-    
-    // Jika kamu meletakkan info stok di teks option, kita ambil angkanya
-    // Contoh teks: "Beras (Sedia: 50)" -> kita ambil 50
-    const infoStok = optionTerpilih.text.match(/\d+/); 
-    const stokTersedia = infoStok ? parseInt(infoStok[0]) : 0;
-    const jumlahInput = parseInt(inputJumlah.value) || 0;
+if (tombolSimpan) {
+    const selectBarang = document.querySelector('select[name="id_barang"]');
+    const inputJumlah = document.querySelector('input[name="jumlah"]');
 
-    if (jumlahInput > stokTersedia) {
-        // Matikan tombol simpan dan ubah tampilannya
-        tombolSimpan.disabled = true;
-        tombolSimpan.classList.add('opacity-50', 'cursor-not-allowed');
-        inputJumlah.classList.add('border-red-500', 'text-red-600');
-    } else {
-        // Aktifkan kembali jika jumlah sudah benar
-        tombolSimpan.disabled = false;
-        tombolSimpan.classList.remove('opacity-50', 'cursor-not-allowed');
-        inputJumlah.classList.remove('border-red-500', 'text-red-600');
+    function validasiInstan() {
+        const optionTerpilih = selectBarang.options[selectBarang.selectedIndex];
+        const infoStok = optionTerpilih.text.match(/\d+/);
+        const stokTersedia = infoStok ? parseInt(infoStok[0]) : 0;
+        const jumlahInput = parseInt(inputJumlah.value) || 0;
+
+        if (jumlahInput > stokTersedia) {
+            tombolSimpan.disabled = true;
+            tombolSimpan.classList.add('opacity-50', 'cursor-not-allowed');
+            inputJumlah.classList.add('border-red-500', 'text-red-600');
+        } else {
+            tombolSimpan.disabled = false;
+            tombolSimpan.classList.remove('opacity-50', 'cursor-not-allowed');
+            inputJumlah.classList.remove('border-red-500', 'text-red-600');
+        }
     }
-}
 
-// Jalankan fungsi setiap kali ada perubahan input
-inputJumlah.addEventListener('input', validasiInstan);
-selectBarang.addEventListener('change', validasiInstan);
+    inputJumlah.addEventListener('input', validasiInstan);
+    selectBarang.addEventListener('change', validasiInstan);
+}
